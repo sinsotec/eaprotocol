@@ -35,8 +35,22 @@ export default function Page(props: { params: { foundationid: string } })  {
     return etherValue.toFixed(1);
   }
 
-    
+  interface Project {
+    id: number;
+    id_by_foundation: number;
+    name: String;
+    foundation_id: number;
+    description: String;
+    goal: number;
+    balance: number;
+    remaining_amount: number;
+    contributions: number;
+    status_project: String;
+    changed_name: number;
+    created_at: number;
+  }
 
+  
 
     const { data: get_foundation_by_id } = useScaffoldReadContract({
         contractName: "Eaprotocol",
@@ -46,11 +60,11 @@ export default function Page(props: { params: { foundationid: string } })  {
       });
 
     const { data: get_project_by_foundation } = useScaffoldReadContract({
-      contractName: "Eaprotocol",
-      functionName: "get_project_by_foundation",
-      args: [Number(id)],
-      watch: true,
-    }); 
+          contractName: "Eaprotocol",
+          functionName: "get_project_by_foundation",
+          args: [Number(id)],
+          watch: true,
+        }) as unknown as { data: Project[] }; 
 
     const { sendAsync: add_contribution } = useScaffoldMultiWriteContract({
       calls: [
@@ -169,15 +183,17 @@ export default function Page(props: { params: { foundationid: string } })  {
           </div>
       )}
 
+      
+
     const renderProjects = () => {
       if (connectedAddress) {
         return (
           <div>
-          {get_project_by_foundation && get_project_by_foundation.map((project, index) => (
+          {get_project_by_foundation && get_project_by_foundation.map((project: Project, index) => (
           <div className="collapse collapse-plus bg-base-200" key={index}>
             <input type="radio" name="my-accordion-3" defaultChecked key={index}/>
-            <div className="collapse-title text-xl font-medium">
-              {project["name"]}<span className={`badge badge-${project["status_project"] == "Published" ? "accent" : "error"}`}>{project["status_project"]}</span>
+            <div className="collapse-title text-xl font-medium" key={index}>
+              {project.name}<span className={`badge badge-${project["status_project"] == "Published" ? "accent" : "error"}`}>{project["status_project"]}</span>
             </div>
             <div className="collapse-content">
               <p>{project["description"]}</p>
