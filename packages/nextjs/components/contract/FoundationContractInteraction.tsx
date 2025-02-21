@@ -379,8 +379,8 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       return (
         <div>
         {get_project_by_foundation && get_project_by_foundation.map((project, index) => (
-        <div className="collapse collapse-plus bg-base-200">
-          <input type="radio" name="my-accordion-3" defaultChecked />
+        <div className="collapse collapse-plus bg-base-200" key={index}>
+          <input type="radio" name="my-accordion-3" defaultChecked key={index}/>
           <div className="collapse-title text-xl font-medium">
             {project["name"]}<span className="badge badge-accent">{project["status_project"]}</span>
           </div>

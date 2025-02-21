@@ -109,7 +109,7 @@ export default function Page(props: { params: { foundationid: string } })  {
     };
 
     
-     const calculateValueBar = (goal, remaining) => {
+     const calculateValueBar = (goal: number, remaining: number) => {
         let value = Math.floor(100 - (remaining * 100 / goal));
         return value;
     } 
