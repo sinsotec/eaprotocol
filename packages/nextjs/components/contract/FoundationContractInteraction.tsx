@@ -269,7 +269,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                           }
                         }
                         //list="symbols"
-                        className="input bg-input input-ghost rounded-none focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
+                        className="input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
                         placeholder="Enter foundation name"
                       />
 
@@ -282,7 +282,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                           setTempFoundation( tempFoundation => ({...tempFoundation, ...description}))
                           }
                         }
-                        className="input bg-input input-ghost rounded-none focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
+                        className="input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
                         placeholder="Enter description"
                         />
                       <div className="w-24 mb-2 font-medium break-words text-function">
@@ -294,7 +294,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                           setTempFoundation( tempFoundation => ({...tempFoundation, ...web}))
                           }
                         }
-                        className="input bg-input input-ghost rounded-none focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
+                        className="input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
                         placeholder="Enter WEB url"
                         />
                       <div className="w-24 mb-2 font-medium break-words text-function">
@@ -306,7 +306,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                           setTempFoundation( tempFoundation => ({...tempFoundation, ...email}))
                           }
                         }
-                        className="input bg-input input-ghost rounded-none focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
+                        className="input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral mb-4"
                         placeholder="Enter EMAIL"
                         />
                     </div>
@@ -357,7 +357,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                           }
                         }
                         //list="symbols"
-                        className="input bg-input input-ghost rounded-none focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
+                        className="input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
                         placeholder="Project Name"
                       />
 
@@ -370,7 +370,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                           setTempProject( tempProject => ({...tempProject, ...description}))
                           }
                         }
-                        className="input bg-input input-ghost rounded-none focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
+                        className="input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
                         placeholder="Describe the project"
                         />
                       <div className="w-24 mb-2 font-medium break-words text-function">
@@ -382,7 +382,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                           setTempProject( tempProject => ({...tempProject, ...goal}))
                           }
                         }
-                        className="tooltip before:content-[attr(data-tip)] before:right-[-10px] before:left-auto before:transform-none input bg-input input-ghost rounded-none focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral"
+                        className="tooltip before:content-[attr(data-tip)] before:right-[-10px] before:left-auto before:transform-none input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral mb-4"
                         placeholder="Enter Goal in weis"
                         />
                     <div className="flex flex-col space-y-5">
@@ -424,13 +424,21 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     }
   }
 
+  const formatDate = (value: number) => {
+    const myDate = new Date(Number(value) * 1000);
+    return myDate.toLocaleDateString('en-US', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+  };
   //console.log(get_project_by_foundation[0]);
   const renderProjects = () => {
     if (connectedAddress) {
       return (
         <div>
         {get_project_by_foundation && get_project_by_foundation.map((project: Project, index) => (
-        <div className="collapse collapse-plus bg-base-200" key={index}>
+        <div className="collapse collapse-plus bg-base-200 mb-4" key={index}>
           <input type="radio" name="my-accordion-3" defaultChecked key={index}/>
           <div className="collapse-title text-xl font-medium flex justify-between">
             {project["name"]}<span className="badge badge-accent">{project["status_project"]}</span>
@@ -438,7 +446,8 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
           <div className="collapse-content">
             <p>{project["description"]}</p>
             <p className=""><span>Goal: </span>{project["goal"].toString()} wei - {formatEther(Number(project["goal"]))} ETH</p>
-            <p className=""><span>Balance: </span>{project["balance"].toString()}</p>
+            <p className=""><span>Created: </span> {formatDate(project["created_at"])}</p>
+            <p className=""><span>Balance: </span>{project["balance"].toString()} wei - {formatEther(Number(project["balance"]))} ETH</p>
             <p className=""><span>Remaining: </span>{Number(project["remaining_amount"])} wei- {formatEther(Number(project["remaining_amount"]))} ETH</p>
             <progress className="progress progress-success" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
             <p>{renderEditWhitdrawButton(project["status_project"], project["id"])}</p>
