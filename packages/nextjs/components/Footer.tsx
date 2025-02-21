@@ -48,14 +48,14 @@ export const Footer = () => {
                 <BlockExplorer />
               </>
             )}
-            <Link
+            {/* <Link
               href={"/configure"}
               passHref
               className="btn btn-sm font-normal gap-1 cursor-pointer border border-[#32BAC4] shadow-none"
             >
               <Cog8ToothIcon className="h-4 w-4 text-[#32BAC4]" />
               <span>Configure Contracts</span>
-            </Link>
+            </Link> */}
             {nativeCurrencyPrice > 0 && (
               <div>
                 <div className="btn btn-sm font-normal gap-1 cursor-auto border border-[#32BAC4] shadow-none">
@@ -70,7 +70,7 @@ export const Footer = () => {
       <div className="w-full">
         <ul className="menu menu-horizontal w-full">
           <div className="flex justify-center items-center gap-2 text-sm w-full">
-            <div className="text-center">
+            {/* <div className="text-center">
               <a
                 href="https://github.com/Scaffold-Stark/scaffold-stark-2"
                 target="_blank"
@@ -79,17 +79,17 @@ export const Footer = () => {
               >
                 Fork me
               </a>
-            </div>
+            </div> */}
 
             <div className="text-center">
-              <a
+              {/* <a
                 href="https://t.me/+wO3PtlRAreo4MDI9"
                 target="_blank"
                 rel="noreferrer"
                 className="link"
-              >
-                Support
-              </a>
+              > */}
+                Made with ❤ by EAP Team
+              {/* </a> */}
             </div>
           </div>
         </ul>

@@ -3,6 +3,995 @@
  * You should not edit it manually or your changes might be overwritten.
  */
 
-const deployedContracts = {} as const;
+const deployedContracts = {
+  devnet: {
+    Eaprotocol: {
+      address:
+        "0x6f6bdb922eeb221152e528027fe49bc9e8434bd7f35ef6793cb86216439a165",
+      abi: [
+        {
+          type: "impl",
+          name: "EaprotocolImpl",
+          interface_name: "contracts::Eaprotocol::IEaprotocol",
+        },
+        {
+          type: "struct",
+          name: "core::byte_array::ByteArray",
+          members: [
+            {
+              name: "data",
+              type: "core::array::Array::<core::bytes_31::bytes31>",
+            },
+            {
+              name: "pending_word",
+              type: "core::felt252",
+            },
+            {
+              name: "pending_word_len",
+              type: "core::integer::u32",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "core::integer::u256",
+          members: [
+            {
+              name: "low",
+              type: "core::integer::u128",
+            },
+            {
+              name: "high",
+              type: "core::integer::u128",
+            },
+          ],
+        },
+        {
+          type: "enum",
+          name: "core::bool",
+          variants: [
+            {
+              name: "False",
+              type: "()",
+            },
+            {
+              name: "True",
+              type: "()",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "contracts::Eaprotocol::Foundation",
+          members: [
+            {
+              name: "id",
+              type: "core::integer::u64",
+            },
+            {
+              name: "name",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "address_account",
+              type: "core::starknet::contract_address::ContractAddress",
+            },
+            {
+              name: "description",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "email",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "web_url",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "collected_funds",
+              type: "core::integer::u256",
+            },
+            {
+              name: "active",
+              type: "core::bool",
+            },
+            {
+              name: "projects_count",
+              type: "core::integer::u64",
+            },
+            {
+              name: "created_at",
+              type: "core::integer::u64",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "contracts::Eaprotocol::Project",
+          members: [
+            {
+              name: "id",
+              type: "core::integer::u64",
+            },
+            {
+              name: "id_by_foundation",
+              type: "core::integer::u64",
+            },
+            {
+              name: "name",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "foundation_id",
+              type: "core::integer::u64",
+            },
+            {
+              name: "description",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "goal",
+              type: "core::integer::u256",
+            },
+            {
+              name: "balance",
+              type: "core::integer::u256",
+            },
+            {
+              name: "remaining_amount",
+              type: "core::integer::u256",
+            },
+            {
+              name: "contributions",
+              type: "core::integer::u64",
+            },
+            {
+              name: "status_project",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "changed_name",
+              type: "core::integer::u8",
+            },
+            {
+              name: "created_at",
+              type: "core::integer::u64",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "openzeppelin_token::erc20::interface::IERC20Dispatcher",
+          members: [
+            {
+              name: "contract_address",
+              type: "core::starknet::contract_address::ContractAddress",
+            },
+          ],
+        },
+        {
+          type: "interface",
+          name: "contracts::Eaprotocol::IEaprotocol",
+          items: [
+            {
+              type: "function",
+              name: "add_foundation",
+              inputs: [
+                {
+                  name: "name",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "description",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "email",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "web_url",
+                  type: "core::byte_array::ByteArray",
+                },
+              ],
+              outputs: [
+                {
+                  type: "core::integer::u64",
+                },
+              ],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "get_foundation_by_address",
+              inputs: [
+                {
+                  name: "account",
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Foundation",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_foundation_by_id",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Foundation",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_all_foundations",
+              inputs: [],
+              outputs: [
+                {
+                  type: "core::array::Array::<contracts::Eaprotocol::Foundation>",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "add_project",
+              inputs: [
+                {
+                  name: "name",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "description",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "goal",
+                  type: "core::integer::u256",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "get_project_by_id",
+              inputs: [
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Project",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_project_by_foundation_by_id",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Project",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_project_by_foundation",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "core::array::Array::<contracts::Eaprotocol::Project>",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "add_contribution",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "amount",
+                  type: "core::integer::u256",
+                },
+                {
+                  name: "toke",
+                  type: "core::byte_array::ByteArray",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "withdraw_project",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "token_dispatcher",
+              inputs: [
+                {
+                  name: "token",
+                  type: "core::felt252",
+                },
+              ],
+              outputs: [
+                {
+                  type: "openzeppelin_token::erc20::interface::IERC20Dispatcher",
+                },
+              ],
+              state_mutability: "view",
+            },
+          ],
+        },
+        {
+          type: "impl",
+          name: "OwnableImpl",
+          interface_name: "openzeppelin_access::ownable::interface::IOwnable",
+        },
+        {
+          type: "interface",
+          name: "openzeppelin_access::ownable::interface::IOwnable",
+          items: [
+            {
+              type: "function",
+              name: "owner",
+              inputs: [],
+              outputs: [
+                {
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "transfer_ownership",
+              inputs: [
+                {
+                  name: "new_owner",
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "renounce_ownership",
+              inputs: [],
+              outputs: [],
+              state_mutability: "external",
+            },
+          ],
+        },
+        {
+          type: "constructor",
+          name: "constructor",
+          inputs: [
+            {
+              name: "owner",
+              type: "core::starknet::contract_address::ContractAddress",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+          kind: "struct",
+          members: [
+            {
+              name: "previous_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+            {
+              name: "new_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+          kind: "struct",
+          members: [
+            {
+              name: "previous_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+            {
+              name: "new_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+          kind: "enum",
+          variants: [
+            {
+              name: "OwnershipTransferred",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+              kind: "nested",
+            },
+            {
+              name: "OwnershipTransferStarted",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+              kind: "nested",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "contracts::Eaprotocol::Eaprotocol::Event",
+          kind: "enum",
+          variants: [
+            {
+              name: "OwnableEvent",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+              kind: "flat",
+            },
+          ],
+        },
+      ],
+      classHash:
+        "0x51a1e4b77c17e866b3aabcb4792e16ced1583743d95d4416b9e92077fb65aaa",
+    },
+  },
+  sepolia: {
+    Eaprotocol: {
+      address:
+        "0x7bb90ac47458a14d58033f30ba00ed97a9ccdc64608412c0f74cb17079de9ba",
+      abi: [
+        {
+          type: "impl",
+          name: "EaprotocolImpl",
+          interface_name: "contracts::Eaprotocol::IEaprotocol",
+        },
+        {
+          type: "struct",
+          name: "core::byte_array::ByteArray",
+          members: [
+            {
+              name: "data",
+              type: "core::array::Array::<core::bytes_31::bytes31>",
+            },
+            {
+              name: "pending_word",
+              type: "core::felt252",
+            },
+            {
+              name: "pending_word_len",
+              type: "core::integer::u32",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "core::integer::u256",
+          members: [
+            {
+              name: "low",
+              type: "core::integer::u128",
+            },
+            {
+              name: "high",
+              type: "core::integer::u128",
+            },
+          ],
+        },
+        {
+          type: "enum",
+          name: "core::bool",
+          variants: [
+            {
+              name: "False",
+              type: "()",
+            },
+            {
+              name: "True",
+              type: "()",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "contracts::Eaprotocol::Foundation",
+          members: [
+            {
+              name: "id",
+              type: "core::integer::u64",
+            },
+            {
+              name: "name",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "address_account",
+              type: "core::starknet::contract_address::ContractAddress",
+            },
+            {
+              name: "description",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "email",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "web_url",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "collected_funds",
+              type: "core::integer::u256",
+            },
+            {
+              name: "active",
+              type: "core::bool",
+            },
+            {
+              name: "projects_count",
+              type: "core::integer::u64",
+            },
+            {
+              name: "created_at",
+              type: "core::integer::u64",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "contracts::Eaprotocol::Project",
+          members: [
+            {
+              name: "id",
+              type: "core::integer::u64",
+            },
+            {
+              name: "id_by_foundation",
+              type: "core::integer::u64",
+            },
+            {
+              name: "name",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "foundation_id",
+              type: "core::integer::u64",
+            },
+            {
+              name: "description",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "goal",
+              type: "core::integer::u256",
+            },
+            {
+              name: "balance",
+              type: "core::integer::u256",
+            },
+            {
+              name: "remaining_amount",
+              type: "core::integer::u256",
+            },
+            {
+              name: "contributions",
+              type: "core::integer::u64",
+            },
+            {
+              name: "status_project",
+              type: "core::byte_array::ByteArray",
+            },
+            {
+              name: "changed_name",
+              type: "core::integer::u8",
+            },
+            {
+              name: "created_at",
+              type: "core::integer::u64",
+            },
+          ],
+        },
+        {
+          type: "struct",
+          name: "openzeppelin_token::erc20::interface::IERC20Dispatcher",
+          members: [
+            {
+              name: "contract_address",
+              type: "core::starknet::contract_address::ContractAddress",
+            },
+          ],
+        },
+        {
+          type: "interface",
+          name: "contracts::Eaprotocol::IEaprotocol",
+          items: [
+            {
+              type: "function",
+              name: "add_foundation",
+              inputs: [
+                {
+                  name: "name",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "description",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "email",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "web_url",
+                  type: "core::byte_array::ByteArray",
+                },
+              ],
+              outputs: [
+                {
+                  type: "core::integer::u64",
+                },
+              ],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "get_foundation_by_address",
+              inputs: [
+                {
+                  name: "account",
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Foundation",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_foundation_by_id",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Foundation",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_all_foundations",
+              inputs: [],
+              outputs: [
+                {
+                  type: "core::array::Array::<contracts::Eaprotocol::Foundation>",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "add_project",
+              inputs: [
+                {
+                  name: "name",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "description",
+                  type: "core::byte_array::ByteArray",
+                },
+                {
+                  name: "goal",
+                  type: "core::integer::u256",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "get_project_by_id",
+              inputs: [
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Project",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_project_by_foundation_by_id",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "contracts::Eaprotocol::Project",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "get_project_by_foundation",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [
+                {
+                  type: "core::array::Array::<contracts::Eaprotocol::Project>",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "add_contribution",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "amount",
+                  type: "core::integer::u256",
+                },
+                {
+                  name: "toke",
+                  type: "core::byte_array::ByteArray",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "withdraw_project",
+              inputs: [
+                {
+                  name: "foundation_id",
+                  type: "core::integer::u64",
+                },
+                {
+                  name: "project_id",
+                  type: "core::integer::u64",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "token_dispatcher",
+              inputs: [
+                {
+                  name: "token",
+                  type: "core::felt252",
+                },
+              ],
+              outputs: [
+                {
+                  type: "openzeppelin_token::erc20::interface::IERC20Dispatcher",
+                },
+              ],
+              state_mutability: "view",
+            },
+          ],
+        },
+        {
+          type: "impl",
+          name: "OwnableImpl",
+          interface_name: "openzeppelin_access::ownable::interface::IOwnable",
+        },
+        {
+          type: "interface",
+          name: "openzeppelin_access::ownable::interface::IOwnable",
+          items: [
+            {
+              type: "function",
+              name: "owner",
+              inputs: [],
+              outputs: [
+                {
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              state_mutability: "view",
+            },
+            {
+              type: "function",
+              name: "transfer_ownership",
+              inputs: [
+                {
+                  name: "new_owner",
+                  type: "core::starknet::contract_address::ContractAddress",
+                },
+              ],
+              outputs: [],
+              state_mutability: "external",
+            },
+            {
+              type: "function",
+              name: "renounce_ownership",
+              inputs: [],
+              outputs: [],
+              state_mutability: "external",
+            },
+          ],
+        },
+        {
+          type: "constructor",
+          name: "constructor",
+          inputs: [
+            {
+              name: "owner",
+              type: "core::starknet::contract_address::ContractAddress",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+          kind: "struct",
+          members: [
+            {
+              name: "previous_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+            {
+              name: "new_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+          kind: "struct",
+          members: [
+            {
+              name: "previous_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+            {
+              name: "new_owner",
+              type: "core::starknet::contract_address::ContractAddress",
+              kind: "key",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+          kind: "enum",
+          variants: [
+            {
+              name: "OwnershipTransferred",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferred",
+              kind: "nested",
+            },
+            {
+              name: "OwnershipTransferStarted",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::OwnershipTransferStarted",
+              kind: "nested",
+            },
+          ],
+        },
+        {
+          type: "event",
+          name: "contracts::Eaprotocol::Eaprotocol::Event",
+          kind: "enum",
+          variants: [
+            {
+              name: "OwnableEvent",
+              type: "openzeppelin_access::ownable::ownable::OwnableComponent::Event",
+              kind: "flat",
+            },
+          ],
+        },
+      ],
+      classHash:
+        "0x51a1e4b77c17e866b3aabcb4792e16ced1583743d95d4416b9e92077fb65aaa",
+    },
+  },
+} as const;
 
 export default deployedContracts;

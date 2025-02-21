@@ -26,6 +26,18 @@ export const menuLinks: HeaderMenuLink[] = [
     href: "/",
   },
   {
+    label: "Contribute",
+    href: "/contribute",
+  },
+  {
+    label: "Foundation",
+    href: "/foundation",
+  },
+  {
+    label: "Documentation",
+    href: "https://effective-altruism-protocol.gitbook.io/enhanced-altruism-protocol-english-version",
+  },
+  {
     label: "Debug Contracts",
     href: "/debug",
     icon: <BugAntIcon className="h-4 w-4" />,
@@ -155,12 +167,12 @@ export const Header = () => {
               alt="SE2 logo"
               className="cursor-pointer"
               fill
-              src="/logo.svg"
+              src="/logo-white.svg"
             />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold leading-tight">Scaffold-Stark</span>
-            <span className="text-xs">Starknet dev stack</span>
+            <span className="font-bold leading-tight">Enhanced Altruism Protocol</span>
+            <span className="text-xs">DECENTRALIZING PHILANTROPY</span>
           </div>
         </Link>
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">
