@@ -192,7 +192,7 @@ export default function Page(props: { params: { foundationid: string } })  {
           {get_project_by_foundation && get_project_by_foundation.map((project: Project, index) => (
           <div className="collapse collapse-plus bg-base-200" key={index}>
             <input type="radio" name="my-accordion-3" defaultChecked key={index}/>
-            <div className="collapse-title text-xl font-medium" key={index}>
+            <div className="collapse-title text-xl font-medium flex justify-between" key={index}>
               {project.name}<span className={`badge badge-${project["status_project"] == "Published" ? "accent" : "error"}`}>{project["status_project"]}</span>
             </div>
             <div className="collapse-content">
@@ -201,7 +201,7 @@ export default function Page(props: { params: { foundationid: string } })  {
               <p className=""><span>Created: </span> {formatDate(project["created_at"])}</p>
               <p className=""><span>Balance: </span>{project["balance"].toString()} wei - {formatEther(Number(project["balance"]))} ETH</p>
               <p className=""><span>Remaining: </span>{Number(project["remaining_amount"])} wei - {formatEther(Number(project["remaining_amount"]))} ETH</p>
-              <progress className="progress w-56" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
+              <progress className="progress progress-success" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
               {project["status_project"] == "Published" && renderDonationGroup(project["id"])}
             </div>
           </div>

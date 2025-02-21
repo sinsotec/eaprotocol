@@ -432,16 +432,16 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
         {get_project_by_foundation && get_project_by_foundation.map((project: Project, index) => (
         <div className="collapse collapse-plus bg-base-200" key={index}>
           <input type="radio" name="my-accordion-3" defaultChecked key={index}/>
-          <div className="collapse-title text-xl font-medium">
+          <div className="collapse-title text-xl font-medium flex justify-between">
             {project["name"]}<span className="badge badge-accent">{project["status_project"]}</span>
           </div>
           <div className="collapse-content">
             <p>{project["description"]}</p>
             <p className=""><span>Goal: </span>{project["goal"].toString()} wei - {formatEther(Number(project["goal"]))} ETH</p>
             <p className=""><span>Balance: </span>{project["balance"].toString()}</p>
-            <p className=""><span>Remaining: </span>{formatEther(Number(project["remaining_amount"]))}</p>
-            <progress className="progress w-56" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
-            {renderEditWhitdrawButton(project["status_project"], project["id"])}
+            <p className=""><span>Remaining: </span>{Number(project["remaining_amount"])} wei- {formatEther(Number(project["remaining_amount"]))} ETH</p>
+            <progress className="progress progress-success" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
+            <p>{renderEditWhitdrawButton(project["status_project"], project["id"])}</p>
           </div>
         </div>
         ))}
@@ -449,8 +449,6 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
               );
             }
           };
-           
-
 
 
   return (
