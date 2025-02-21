@@ -174,7 +174,7 @@ export default function Page(props: { params: { foundationid: string } })  {
         return (
           <div>
           {get_project_by_foundation && get_project_by_foundation.map((project, index) => (
-          <div className="collapse collapse-plus bg-base-200">
+          <div className="collapse collapse-plus bg-base-200" key={index}>
             <input type="radio" name="my-accordion-3" defaultChecked />
             <div className="collapse-title text-xl font-medium">
               {project["name"]}<span className={`badge badge-${project["status_project"] == "Published" ? "accent" : "error"}`}>{project["status_project"]}</span>
