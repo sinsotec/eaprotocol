@@ -26,7 +26,7 @@ export default function Page(props: { params: { foundationid: string } })  {
   const { data: EaprotocolContract } = useDeployedContractInfo("Eaprotocol");
 
   const [donation, setDonation] = useState("");
-  const [projectId, setprojectId] = useState("");
+  const [projectId, setprojectId] = useState(0);
 
 
     
@@ -153,7 +153,7 @@ export default function Page(props: { params: { foundationid: string } })  {
       });
     };
 
-    const renderDonationGroup = (project_id) => {
+    const renderDonationGroup = (project_id: number) => {
       return(
           <div>
               <input
