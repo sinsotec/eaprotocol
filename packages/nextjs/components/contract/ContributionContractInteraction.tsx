@@ -48,13 +48,26 @@ export const ContributionContractInteraction = ({ address }: { address?: string 
 
   const { targetNetwork } = useTargetNetwork();
 
+  interface Foundation {
+    id: number,
+    name: string,
+    address_account: unknown,
+    description: String,
+    email: String,
+    web_url: String,
+    collected_funds: number,
+    active: boolean,
+    projects_count: number,
+    created_at: number,
+  }
+
   // Contract Read Actions
   const { data: get_foundation_by_address } = useScaffoldReadContract({
     contractName: "Eaprotocol",
     functionName: "get_foundation_by_address",
     args: [connectedAddress],
     watch: true,
-  });
+  }) as unknown as { data: Foundation }; 
 
   const { data: get_project_by_foundation } = useScaffoldReadContract({
     contractName: "Eaprotocol",
@@ -68,7 +81,7 @@ export const ContributionContractInteraction = ({ address }: { address?: string 
     functionName: "get_all_foundations",
     args: [],
     watch: true,
-  });
+  }) as unknown as { data: Foundation[] };
 
   const getFoundationInfo = async () => {
     try {
@@ -96,7 +109,7 @@ export const ContributionContractInteraction = ({ address }: { address?: string 
                 </tr>
               </thead>
               <tbody>
-                {get_all_foundations?.map((foundation, index) => (
+                {get_all_foundations?.map((foundation: Foundation, index) => (
                   //index ?
                   <>
                   

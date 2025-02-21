@@ -28,13 +28,65 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
   const [foundationId, setFoundationId] = useState(0);//useState<bigint>(0n);
 
 
-  const [tempFoundation, setTempFoundation] = useState({});
+  const [tempFoundation, setTempFoundation] = useState<Foundation>({
+    id: 0,
+    name: "",
+    address_account: null,
+    description: "",
+    email: "",
+    web_url: "",
+    collected_funds: 0,
+    active: false,
+    projects_count: 0,
+    created_at: 0,
+  });
 
-  const [tempProject, setTempProject] = useState({});
+  const [tempProject, setTempProject] = useState<Project>({
+    id: 0,
+    id_by_foundation: 0,
+    name: "",
+    foundation_id: 0,
+    description: "",
+    goal: 0,
+    balance: 0,
+    remaining_amount: 0,
+    contributions: 0,
+    status_project: "",
+    changed_name: 0,
+    created_at: 0,
+  });
 
   //const [projectId, setProjectId] = useState({});
 
   let project_id = 0;
+
+  interface Foundation {
+    id: number,
+    name: string,
+    address_account: unknown,
+    description: string,
+    email: string,
+    web_url: string,
+    collected_funds: number,
+    active: boolean,
+    projects_count: number,
+    created_at: number,
+  }
+
+  interface Project {
+    id: number;
+    id_by_foundation: number;
+    name: string;
+    foundation_id: number;
+    description: string;
+    goal: number;
+    balance: number;
+    remaining_amount: number;
+    contributions: number;
+    status_project: string;
+    changed_name: number;
+    created_at: number;
+  }
 
 
   enum status_project {published, closed, withdrawn, paused, refunded}
@@ -66,14 +118,14 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     functionName: "get_foundation_by_address",
     args: [connectedAddress],
     watch: true,
-  });
+  })as unknown as { data: Foundation };
 
   const { data: get_project_by_foundation } = useScaffoldReadContract({
     contractName: "Eaprotocol",
     functionName: "get_project_by_foundation",
     args: [Number(foundationId)],
     watch: true,
-  });  
+  })as unknown as { data: Project[] }; 
 
   const getFoundationInfo = async () => {
     try {
@@ -136,7 +188,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       tempFoundation.name, 
       tempFoundation.description,
       tempFoundation.email,
-      tempFoundation.web,],
+      tempFoundation.web_url,],
   });
 
   
@@ -184,7 +236,6 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     (fn: () => Promise<any>, errorMessageFnDescription: string) => async () => {
       try {
         await fn();
-        setTempProject({});
       } catch (error) {
         console.error(
           `Error calling ${errorMessageFnDescription} function`,
@@ -196,7 +247,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
   const renderRegisterFoundation = () => {
     if (connectedAddress) {
       if(get_foundation_by_address){
-        if (get_foundation_by_address.id.toString() != 0) {
+        if (get_foundation_by_address.id.toString() != "0") {
           return (
             <div>
               <div className="py-5 space-y-3 first:pt-0 last:pb-1">{get_foundation_by_address.name}</div>
@@ -327,7 +378,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                       </div>
                       <input
                         onChange={(e) =>{
-                          let goal = {goal: e.target.value};
+                          let goal = {goal: Number(e.target.value)};
                           setTempProject( tempProject => ({...tempProject, ...goal}))
                           }
                         }
@@ -352,7 +403,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     return value;
   }
 
-  const renderEditWhitdrawButton = (status, id) => {
+  const renderEditWhitdrawButton = (status: string, id: number) => {
     if(status == "Closed" ){
       project_id = id;
       return <button onClick={wrapInTryCatch(withdraw_project, "withdraw_project")}>Withdraw</button>
@@ -378,7 +429,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     if (connectedAddress) {
       return (
         <div>
-        {get_project_by_foundation && get_project_by_foundation.map((project, index) => (
+        {get_project_by_foundation && get_project_by_foundation.map((project: Project, index) => (
         <div className="collapse collapse-plus bg-base-200" key={index}>
           <input type="radio" name="my-accordion-3" defaultChecked key={index}/>
           <div className="collapse-title text-xl font-medium">
