@@ -209,7 +209,7 @@ export default function Page(props: { params: { foundationid: string } })  {
               <p className=""><span>Balance: </span>{project["balance"].toString()} wei - {formatEther(Number(project["balance"]))} ETH</p>
               <p className=""><span>Remaining: </span>{Number(project["remaining_amount"])} wei - {formatEther(Number(project["remaining_amount"]))} ETH</p>
               <progress className="progress progress-success" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
-              <p>{project["status_project"] == "Published" && renderDonationGroup(project["id"])}</p>
+              <p>{project["status_project"] == "Published" && renderDonationGroup(project["id_by_foundation"])}</p>
             </div>
           </div>
           ))}

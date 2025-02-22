@@ -122,7 +122,7 @@ export const ContributionContractInteraction = ({ address }: { address?: string 
                     <td><Link href={`/contribute/${foundation.id}`}>{foundation.name}</Link></td>
                     <td><Link href={`/contribute/${foundation.id}`}>{foundation.description}</Link></td>
                     <td><Link href={`/contribute/${foundation.id}`}>{Number(foundation.projects_count)}</Link></td>
-                    <td><Link href={`/contribute/${foundation.id}`}>{Number(foundation.collected_funds)}</Link></td>
+                    <td><Link href={`/contribute/${foundation.id}`}>{Number(foundation.collected_funds)} wei</Link></td>
                     {/* <td><Link href={`/contribute/${foundation.id}`}>{foundation.address_account.toString()}</Link></td> */}
 
                   </tr>

@@ -325,7 +325,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       }
     } else {
       return (
-        <p>conecta</p>//<button label="Connect your wallet" onClick={connectWallet}/>
+        <p></p>//<button label="Connect your wallet" onClick={connectWallet}/>
       );
     }
   };

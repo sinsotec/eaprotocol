@@ -359,9 +359,9 @@ mod Eaprotocol {
             toke: ByteArray,){
                 assert!(amount > 0, "Amount must be greater than 0");
                 assert!(self.foundation_id_by_address.read(get_caller_address()) != foundation_id, "You can't contribute to your own project");
-                assert!(
-                    self.projects_by_foundation.entry(foundation_id).entry(project_id).read().status_project == "Published", 
-                    "Project is not published");
+                //assert!(
+                //    self.projects_by_foundation.entry(foundation_id).entry(project_id).read().status_project == "Published", 
+                //    "Project is not published");
                 assert!(
                     self.projects_by_foundation.entry(foundation_id).entry(project_id).read().remaining_amount >= amount, 
                     "Amount is greater than remaining amount");
@@ -445,6 +445,6 @@ mod Eaprotocol {
             project
         }
 
-        
+
     }
 }
