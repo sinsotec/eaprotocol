@@ -257,7 +257,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
         }
         else {
           return (
-                  <div className="py-5 space-y-3 first:pt-0 last:pb-1">
+                  <div className="py-5 space-y-3 first:pt-0 last:pb-1 w-full">
                     <div className="flex flex-col my-6">
                       <div className="w-24 mb-2 font-medium break-words text-function">
                           Name
