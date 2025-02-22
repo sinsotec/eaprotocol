@@ -234,7 +234,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     if(connectedAddress){
       getFoundationInfo();
     }
-  }, [foundationName, add_foundation, setIdToWithdraw]);
+  }, [foundationName, add_foundation, idToWithdraw]);
 
   const wrapInTryCatch =
     (fn: () => Promise<any>, errorMessageFnDescription: string) => async () => {
@@ -248,10 +248,15 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       }
     };
 
-  const call_withdraw = () => {
+  const call_withdraw = (id: number) => {
       console.log(`idto = ${idToWithdraw}`);
       console.log(`id = ${id}`);
-      withdraw_project();
+      setIdToWithdraw(id);
+      if (idToWithdraw != id){
+        setIdToWithdraw(id);
+      } else {
+        withdraw_project();}
+      
   }
 
   const renderRegisterFoundation = () => {
@@ -419,7 +424,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                 className="btn btn-secondary uppercase text-white"
                 onClick={() => {
                 setIdToWithdraw(id)
-                call_withdraw()}}>
+                call_withdraw(id)}}>
                   Withdraw
               </button>
     }/* else if(status == "Withdrawn"){
