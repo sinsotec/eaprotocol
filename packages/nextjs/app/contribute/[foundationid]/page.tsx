@@ -178,8 +178,15 @@ export default function Page(props: { params: { foundationid: string } })  {
                       setprojectId(project_id);
                       }
                     }
+                    className="tooltip before:content-[attr(data-tip)] before:right-[-10px] before:left-auto before:transform-none input bg-input input-ghost focus-within:border-transparent focus:outline-none h-[2.2rem] min-h-[2.2rem] px-4 border w-full text-sm placeholder:text-[#9596BF] text-neutral mb-4"
                     />
-              <button onClick={() => add_contribution()}>Contribute</button>
+              <p>
+              <button 
+                className="btn btn-secondary uppercase text-white"
+                onClick={() => add_contribution()}>
+                  Contribute
+              </button>
+              </p>
           </div>
       )}
 
@@ -202,7 +209,7 @@ export default function Page(props: { params: { foundationid: string } })  {
               <p className=""><span>Balance: </span>{project["balance"].toString()} wei - {formatEther(Number(project["balance"]))} ETH</p>
               <p className=""><span>Remaining: </span>{Number(project["remaining_amount"])} wei - {formatEther(Number(project["remaining_amount"]))} ETH</p>
               <progress className="progress progress-success" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
-              {project["status_project"] == "Published" && renderDonationGroup(project["id"])}
+              <p>{project["status_project"] == "Published" && renderDonationGroup(project["id"])}</p>
             </div>
           </div>
           ))}
