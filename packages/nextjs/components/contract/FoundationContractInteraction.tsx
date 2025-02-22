@@ -344,7 +344,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
         }
         else { */
           return (
-                  <div className="py-5 space-y-3 first:pt-0 last:pb-1">
+                  <div className="space-y-3 first:pt-0 last:pb-1 w-full">
                     Register new Project
                     <div className="flex flex-col my-6">
                       <div className="w-24 mb-2 font-medium break-words text-function">
@@ -496,13 +496,11 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
         <div>{renderRegisterProject()}</div>
         <div>{renderProjects()}</div>  */}      
 
-        <div className="">
+        <div className="flex flex-col w-full items-center">
           <h1 className="">{connectedAddress ? (!foundationName && "Address Doesn't have a Foundation, please register one.") : "Please connect your wallet first"}</h1>
           {renderRegisterFoundation()}
           {foundationName && renderRegisterProject()}
-          <div className="">
-            {renderProjects()}
-          </div>
+          {renderProjects()}
         </div>     
       </div>
     </div>
