@@ -10,4 +10,4 @@
   <a href="https://youtu.be/-tM_h7kg5xo">Demo</a>
 </h4>
 
-[![Watch the video]](https://youtu.be/-tM_h7kg5xo)
+<p align="center">[![Watch the Demo]](https://youtu.be/-tM_h7kg5xo)</p>
