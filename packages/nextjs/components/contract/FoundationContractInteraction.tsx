@@ -248,7 +248,13 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       }
     };
 
-   const renderRegisterFoundation = () => {
+  const call_withdraw = () => {
+      console.log(`idto = ${idToWithdraw}`);
+      console.log(`id = ${id}`);
+      withdraw_project();
+  }
+
+  const renderRegisterFoundation = () => {
     if (connectedAddress) {
       if(get_foundation_by_address){
         if (get_foundation_by_address.id.toString() != "0") {
@@ -413,7 +419,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
                 className="btn btn-secondary uppercase text-white"
                 onClick={() => {
                 setIdToWithdraw(id)
-                withdraw_project();}}>
+                call_withdraw()}}>
                   Withdraw
               </button>
     }/* else if(status == "Withdrawn"){
