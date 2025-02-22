@@ -248,16 +248,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       }
     };
 
-  const call_withdraw = (id: number) => {
-      console.log(`idto = ${idToWithdraw}`);
-      console.log(`id = ${id}`);
-      setIdToWithdraw(id);
-      if (idToWithdraw != id){
-        setIdToWithdraw(id);
-      } else {
-        withdraw_project();}
-      
-  }
+ 
 
   const renderRegisterFoundation = () => {
     if (connectedAddress) {
@@ -422,9 +413,11 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     if(status == "Closed" ){
       return <button 
                 className="btn btn-secondary uppercase text-white"
-                onClick={() => {
-                setIdToWithdraw(id)
-                call_withdraw(id)}}>
+                onClick={wrapInTryCatch(withdraw_project, "withdraw_project")}
+                onMouseEnter={() => {
+                  setIdToWithdraw(id);
+                }}
+                >
                   Withdraw
               </button>
     }/* else if(status == "Withdrawn"){
