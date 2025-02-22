@@ -7,11 +7,13 @@ import { useScaffoldReadContract } from "~~/hooks/scaffold-stark/useScaffoldRead
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-stark/useScaffoldWriteContract";
 import { ETHToPrice } from "~~/components/contract/ETHToPrice";
 import { Address } from "~~/components/scaffold-stark";
+import { Address as AddressType } from "@starknet-react/chains";
 import humanizeDuration from "humanize-duration";
 import { useScaffoldMultiWriteContract } from "~~/hooks/scaffold-stark/useScaffoldMultiWriteContract";
 import useScaffoldEthBalance from "~~/hooks/scaffold-stark/useScaffoldEthBalance";
 import { id } from "ethers";
 import Link from "next/link";
+
 
 import { use, useEffect, useRef, useState } from "react";
 
@@ -51,7 +53,7 @@ export const ContributionContractInteraction = ({ address }: { address?: string 
   interface Foundation {
     id: number,
     name: string,
-    address_account: unknown,
+    address_account: AddressType,
     description: String,
     email: String,
     web_url: String,
@@ -92,7 +94,7 @@ export const ContributionContractInteraction = ({ address }: { address?: string 
       console.error(err);
     }
   }
-
+  
   const renderFoundations = () => {
     if (connectedAddress) {
       return (
@@ -121,7 +123,8 @@ export const ContributionContractInteraction = ({ address }: { address?: string 
                     <td><Link href={`/contribute/${foundation.id}`}>{foundation.description}</Link></td>
                     <td><Link href={`/contribute/${foundation.id}`}>{Number(foundation.projects_count)}</Link></td>
                     <td><Link href={`/contribute/${foundation.id}`}>{Number(foundation.collected_funds)}</Link></td>
-                    
+                    {/* <td><Link href={`/contribute/${foundation.id}`}>{foundation.address_account.toString()}</Link></td> */}
+
                   </tr>
                   
                   </>

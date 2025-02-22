@@ -329,7 +329,7 @@ mod Eaprotocol {
             self.update_foundations_count(foundation_id);
             self.projects_id.append().write(project.id);
             self.projects_by_id.write(project.id, project.clone());
-            self.projects_by_foundation.entry(foundation_id).write(project.id, project);
+            self.projects_by_foundation.entry(foundation_id).write(project.id_by_foundation, project);//TODO
             let last_project = self.last_project_id_by_foundation.read(foundation_id);
             self.last_project_id_by_foundation.entry(foundation_id).write(last_project + 1);
         }
