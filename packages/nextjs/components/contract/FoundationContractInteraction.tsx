@@ -16,7 +16,7 @@ import { use, useEffect, useRef, useState } from "react";
 
 function formatEther(weiValue: number) {
   const etherValue = weiValue / 1e18;
-  return etherValue.toFixed(1);
+  return etherValue.toFixed(10);
 }
 
 export const FoundationContractInteraction = ({ address }: { address?: string }) => {

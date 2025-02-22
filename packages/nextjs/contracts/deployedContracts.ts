@@ -501,7 +501,7 @@ const deployedContracts = {
   sepolia: {
     Eaprotocol: {
       address:
-        "0xa97e695083c20ac697200158c0cc5f4e513d6f16385eeb7a5ec96b666e793b",
+        "0x2495685d9a69a0f47f9235a40423feb3167beab9de0c4859baac37b7fad8327",
       abi: [
         {
           type: "impl",
@@ -989,7 +989,7 @@ const deployedContracts = {
         },
       ],
       classHash:
-        "0x7a3a4d1eae0e6649b3de50a1fa49ba94ec64bfab41d9279fbd240f4a29260f7",
+        "0x3c22583ff44d09b13f9edd889d69a6e621cd805596fe35904435b5c44c7f0a3",
     },
   },
 } as const;

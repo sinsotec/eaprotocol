@@ -359,9 +359,9 @@ mod Eaprotocol {
             toke: ByteArray,){
                 assert!(amount > 0, "Amount must be greater than 0");
                 assert!(self.foundation_id_by_address.read(get_caller_address()) != foundation_id, "You can't contribute to your own project");
-                //assert!(
-                //    self.projects_by_foundation.entry(foundation_id).entry(project_id).read().status_project == "Published", 
-                //    "Project is not published");
+                assert!(
+                    self.projects_by_foundation.entry(foundation_id).entry(project_id).read().status_project == "Published", 
+                    "Project is not published");
                 assert!(
                     self.projects_by_foundation.entry(foundation_id).entry(project_id).read().remaining_amount >= amount, 
                     "Amount is greater than remaining amount");
@@ -381,7 +381,7 @@ mod Eaprotocol {
                     amount: amount,
                     created_at: get_block_timestamp(),
                 };
-                
+                self.update_foundations_collected(foundation_id, amount);
                 let mut project = self.update_project(foundation_id, project_id, ref contribution);
                 if(project.remaining_amount == 0){
                     project = self.update_project_status(foundation_id, project_id, "Closed");
@@ -421,6 +421,25 @@ mod Eaprotocol {
                 //tags: foundation.tags,
                 active: foundation.active,
                 projects_count: foundation.projects_count + 1,
+                created_at: foundation.created_at,
+                //projects: foundation.projects,
+            });
+        }
+
+        fn update_foundations_collected(ref self: ContractState, foundation_id: u64, amount: u256) {
+            let foundation = self.foundations.at(foundation_id).read();
+            self.foundations.at(foundation_id).write(Foundation {
+                id: foundation.id,
+                name: foundation.name,
+                address_account: foundation.address_account,
+                description: foundation.description,
+                email: foundation.email,
+                web_url: foundation.web_url,
+                //country: foundation.country,
+                collected_funds: foundation.collected_funds + amount,
+                //tags: foundation.tags,
+                active: foundation.active,
+                projects_count: foundation.projects_count,
                 created_at: foundation.created_at,
                 //projects: foundation.projects,
             });

@@ -32,7 +32,7 @@ export default function Page(props: { params: { foundationid: string } })  {
     
   function formatEther(weiValue: number) {
     const etherValue = weiValue / 1e18;
-    return etherValue.toFixed(1);
+    return etherValue.toFixed(10);
   }
 
   interface Project {
