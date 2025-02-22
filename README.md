@@ -7,5 +7,7 @@
 <h4 align="center">
   <a href="https://effective-altruism-protocol.gitbook.io/enhanced-altruism-protocol-english-version">Documentation</a> |
   <a href="https://eaprotocol-five.vercel.app/">Website</a> |
-  <a href="https://#">Demo</a>
+  <a href="https://youtu.be/-tM_h7kg5xo">Demo</a>
 </h4>
+
+[![Watch the video]](https://youtu.be/-tM_h7kg5xo)
