@@ -27,6 +27,8 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
   const [foundationName, setFoundationName] = useState("");
   const [foundationId, setFoundationId] = useState(0);//useState<bigint>(0n);
 
+  const [idToWithdraw, setIdToWithdraw] = useState(0);
+
 
   const [tempFoundation, setTempFoundation] = useState<Foundation>({
     id: 0,
@@ -203,14 +205,16 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       tempProject.goal,],
   });
 
-  const { sendAsync: withdraw_project } = useScaffoldWriteContract({
+  const { sendAsync: withdraw_project,  } = useScaffoldWriteContract({
     contractName: "Eaprotocol",
     functionName: "withdraw_project",
     args: [
       Number(foundationId),
-      Number(project_id)
+      idToWithdraw
     ],
   });
+
+  
 
   // In this case, whenever the value of `walletConnected` changes - this effect will be called
   useEffect(() => {
@@ -230,7 +234,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
     if(connectedAddress){
       getFoundationInfo();
     }
-  }, [foundationName, add_foundation]);
+  }, [foundationName, add_foundation, setIdToWithdraw]);
 
   const wrapInTryCatch =
     (fn: () => Promise<any>, errorMessageFnDescription: string) => async () => {
@@ -244,7 +248,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
       }
     };
 
-  const renderRegisterFoundation = () => {
+   const renderRegisterFoundation = () => {
     if (connectedAddress) {
       if(get_foundation_by_address){
         if (get_foundation_by_address.id.toString() != "0") {
@@ -405,9 +409,14 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
 
   const renderEditWhitdrawButton = (status: string, id: number) => {
     if(status == "Closed" ){
-      project_id = id;
-      return <button onClick={wrapInTryCatch(withdraw_project, "withdraw_project")}>Withdraw</button>
-    }else if(status == "Withdrawn"){
+      return <button 
+                className="btn btn-secondary uppercase text-white"
+                onClick={() => {
+                setIdToWithdraw(id)
+                withdraw_project();}}>
+                  Withdraw
+              </button>
+    }/* else if(status == "Withdrawn"){
       return (
           <>
             <button>Edit</button>
@@ -421,7 +430,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
             <button>Resume</button>
             <button>Refund</button>
           </>)
-    }
+    } */
   }
 
   const formatDate = (value: number) => {
@@ -450,7 +459,7 @@ export const FoundationContractInteraction = ({ address }: { address?: string })
             <p className=""><span>Balance: </span>{project["balance"].toString()} wei - {formatEther(Number(project["balance"]))} ETH</p>
             <p className=""><span>Remaining: </span>{Number(project["remaining_amount"])} wei- {formatEther(Number(project["remaining_amount"]))} ETH</p>
             <progress className="progress progress-success" value={calculateValueBar(Number(project["goal"]), Number(project["remaining_amount"]))} max="100"></progress>
-            <p>{renderEditWhitdrawButton(project["status_project"], project["id"])}</p>
+            <p>{renderEditWhitdrawButton(project["status_project"], project["id_by_foundation"])}</p>
           </div>
         </div>
         ))}

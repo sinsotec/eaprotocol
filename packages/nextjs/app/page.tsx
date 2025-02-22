@@ -47,7 +47,7 @@ const Home = () => {
             <div className="flex flex-col bg-base-100 relative text-[16px] px-10 py-10 text-center items-center max-w-xs rounded-3xl border border-gradient">
               <div className="trapeze"></div>
               <p>
-                I'm a Foundation
+                Foundation Dashboard
               </p>
             </div>
           </Link>

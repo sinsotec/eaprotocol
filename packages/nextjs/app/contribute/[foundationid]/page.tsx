@@ -7,6 +7,7 @@ import { useScaffoldReadContract } from "~~/hooks/scaffold-stark/useScaffoldRead
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-stark/useScaffoldWriteContract";
 import { ETHToPrice } from "~~/components/contract/ETHToPrice";
 import { Address } from "~~/components/scaffold-stark";
+import { Address as AddressType } from "@starknet-react/chains";
 import humanizeDuration from "humanize-duration";
 import { useScaffoldMultiWriteContract } from "~~/hooks/scaffold-stark/useScaffoldMultiWriteContract";
 import useScaffoldEthBalance from "~~/hooks/scaffold-stark/useScaffoldEthBalance";
@@ -17,7 +18,7 @@ import { use, useEffect, useRef, useState } from "react";
 
 
 
-export default function Page(props: { params: { foundationid: string } })  {
+export default function Page(props: { params: { foundationid: number } })  {
     const params = props.params;
     const id = params.foundationid;
 
@@ -33,6 +34,19 @@ export default function Page(props: { params: { foundationid: string } })  {
   function formatEther(weiValue: number) {
     const etherValue = weiValue / 1e18;
     return etherValue.toFixed(10);
+  }
+
+  interface Foundation {
+    id: number,
+    name: string,
+    address_account: AddressType,
+    description: String,
+    email: String,
+    web_url: String,
+    collected_funds: number,
+    active: boolean,
+    projects_count: number,
+    created_at: number,
   }
 
   interface Project {
@@ -54,10 +68,10 @@ export default function Page(props: { params: { foundationid: string } })  {
 
     const { data: get_foundation_by_id } = useScaffoldReadContract({
         contractName: "Eaprotocol",
-        functionName: "get_foundation_by_address",
+        functionName: "get_foundation_by_id",
         args: [id],
         watch: true,
-      });
+      }) as unknown as { data: Foundation };
 
     const { data: get_project_by_foundation } = useScaffoldReadContract({
           contractName: "Eaprotocol",
@@ -195,7 +209,7 @@ export default function Page(props: { params: { foundationid: string } })  {
     const renderProjects = () => {
       if (connectedAddress) {
         return (
-          <div>
+          <div><h2>{get_foundation_by_id?.name}</h2>
           {get_project_by_foundation && get_project_by_foundation.map((project: Project, index) => (
           <div className="collapse collapse-plus bg-base-200 mb-4" key={index}>
             <input type="radio" name="my-accordion-3" defaultChecked key={index}/>
@@ -233,9 +247,10 @@ export default function Page(props: { params: { foundationid: string } })  {
 
  <div
    className="flex flex-col items-center space-y-8 bg-base-100  border-8 border-secondary rounded-xl p-6 w-full max-w-full text-neutral"
- >
+ >  
     {renderProjects()}
  </div>
+ 
 </div>
 
 </div>
